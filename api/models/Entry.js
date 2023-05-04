@@ -11,13 +11,20 @@ class Entry{
     }
 
     static async getAll() {
-        const response = await db.query("SELECT * FROM entries ORDER BY entry_date, entry_time;");
+        const response = await db.query("SELECT * FROM entries ORDER BY entry_date, entry_time DESC;");
         if (response.rows.length === 0) {
             throw new Error("No entries available.")
         }
         return response.rows.map(g => new Entry(g));
     }
 
+    static async getOneById(id) {
+        const response = await db.query("SELECT * FROM entries WHERE entry_id = $1;",[id]);
+        if (response.rows.length != 1) {
+            throw new Error("Unable to locate entry.")
+        }
+        return new Entry(response.rows[0]);
+    }
 
     static async create (data){
         const catagory = data.catagory

@@ -5,6 +5,7 @@ const entryControllers = require('../controllers/entries')
 const entryRouter = Router()
 
 entryRouter.get('/', entryControllers.index)
+entryRouter.get("/:id", entryControllers.show)
 entryRouter.post('/', entryControllers.create)
 
 
