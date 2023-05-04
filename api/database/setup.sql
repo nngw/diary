@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS entries;
 
 CREATE TABLE entries (
     id INT GENERATED ALWAYS AS IDENTITY,
-    username VARCHAR(30) UNIQUE NOT NULL,
+    entry_date VARCHAR(50) NOT NULL,
+    diary_entry VARCHAR(400) NOT NULL,
     PRIMARY KEY (id)
 );
