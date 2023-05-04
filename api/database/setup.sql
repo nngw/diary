@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS entries;
+
+CREATE TABLE entries (
+    id INT GENERATED ALWAYS AS IDENTITY,
+    user VARCHAR (50),
+    PRIMARY KEY (id) 
+);
