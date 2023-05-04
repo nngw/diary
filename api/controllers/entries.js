@@ -29,7 +29,7 @@ async function showYear (req, res) {
     }
 }
 
-async function showBycategory (req, res) {
+async function showByCategory (req, res) {
     try {
         const category = req.params.category;
         console.log(category)
@@ -51,5 +51,5 @@ async function create (req, res) {
 }
 
 module.exports = {
-    index, create, show, showYear, showBycategory
+    index, create, show, showYear, showByCategory
 }
