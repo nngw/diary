@@ -1,11 +1,11 @@
 const db = require ('../database/connect')
 
 class Entry{
-    constructor ({entry_id, entry_date, entry_time, catagory,entry_title, diary_entry }) {
+    constructor ({entry_id, entry_date, entry_time, category,entry_title, diary_entry }) {
         this.id = entry_id
         this.date = entry_date
         this.time = entry_time
-        this.catagory = catagory
+        this.category = category
         this.title = entry_title
         this.entry = diary_entry
     }
@@ -35,13 +35,20 @@ class Entry{
         return response.rows.map(g => new Entry(g));
     }
 
+    static async getByCategory(category){ 
+        const response = await db.query("SELECT * FROM entries WHERE category = $1 ORDER BY entry_date, entry_time DESC;", [category]);
+        if (response.rows.length === 0) {
+            throw new Error("No entries available.")
+        }
+        return response.rows.map(g => new Entry(g));
+    }
+
     static async create (data){
-        const catagory = data.catagory
+        const category = data.category
         const title = data.title
         const entry = data.entry
-        console.log(data)
 
-        const response = await db.query("INSERT INTO entries (entry_date, entry_time, catagory, entry_title, diary_entry) VALUES (CURRENT_DATE, CURRENT_TIME, $1, $2, $3);", [catagory, title, entry])
+        const response = await db.query("INSERT INTO entries (entry_date, entry_time, category, entry_title, diary_entry) VALUES (CURRENT_DATE, CURRENT_TIME, $1, $2, $3);", [category, title, entry])
         
         return "entry created"
     }    
