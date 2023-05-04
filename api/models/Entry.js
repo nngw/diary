@@ -35,6 +35,14 @@ class Entry{
         return response.rows.map(g => new Entry(g));
     }
 
+    static async getByCatagory(catagory){ 
+        const response = await db.query("SELECT * FROM entries WHERE catagory = $1 ORDER BY entry_date, entry_time DESC;", [catagory]);
+        if (response.rows.length === 0) {
+            throw new Error("No entries available.")
+        }
+        return response.rows.map(g => new Entry(g));
+    }
+
     static async create (data){
         const catagory = data.catagory
         const title = data.title
