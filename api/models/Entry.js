@@ -10,6 +10,15 @@ class Entry{
         this.entry = diary_entry
     }
 
+    static async getAll() {
+        const response = await db.query("SELECT * FROM entries ORDER BY entry_date, entry_time;");
+        if (response.rows.length === 0) {
+            throw new Error("No entries available.")
+        }
+        return response.rows.map(g => new Entry(g));
+    }
+
+
     static async create (data){
         const catagory = data.catagory
         const title = data.title
