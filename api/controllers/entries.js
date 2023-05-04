@@ -29,11 +29,11 @@ async function showYear (req, res) {
     }
 }
 
-async function showByCatagory (req, res) {
+async function showBycategory (req, res) {
     try {
-        const catagory = req.params.catagory;
-        console.log(catagory)
-        const entry = await Entry.getByCatagory(catagory);
+        const category = req.params.category;
+        console.log(category)
+        const entry = await Entry.getBycategory(category);
         res.status(200).json(entry);
     } catch (err) {
         res.status(404).json({"error": err.message})
@@ -51,5 +51,5 @@ async function create (req, res) {
 }
 
 module.exports = {
-    index, create, show, showYear, showByCatagory
+    index, create, show, showYear, showBycategory
 }
