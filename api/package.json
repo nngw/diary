@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon -L index.js",
+    "setup-db": "node ./database/setup.js",
+    "start_api":"npm i && node ./database/setup.js && nodemon -L index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
