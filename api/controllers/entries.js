@@ -19,8 +19,29 @@ async function show (req, res) {
     }
 }
 
+async function showYear (req, res) {
+    try {
+        const year = parseInt(req.params.year);
+        const entry = await Entry.getByYear(year);
+        res.status(200).json(entry);
+    } catch (err) {
+        res.status(404).json({"error": err.message})
+    }
+}
+
+// async function showDate (req, res) {
+//     try {
+//         const date = parseInt(req.params.date);
+//         const entry = await Entry.getByMonth(month);
+//         res.status(200).json(entry);
+//     } catch (err) {
+//         res.status(404).json({"error": err.message})
+//     }
+// }
+
 async function create (req, res) {
     try {
+        console.log(req.params.body)
         const entry = await Entry.create(req.body);
         res.json(entry);
     } catch (err) {
@@ -29,5 +50,6 @@ async function create (req, res) {
 }
 
 module.exports = {
-    index, create, show
+    index, create, show, showYear
+    //, showDate
 }

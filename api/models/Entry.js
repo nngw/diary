@@ -26,6 +26,15 @@ class Entry{
         return new Entry(response.rows[0]);
     }
 
+
+    static async getByYear(year){ 
+        const response = await db.query("SELECT * FROM entries WHERE EXTRACT(YEAR FROM entry_date) = $1 ORDER BY entry_date, entry_time DESC;", [year]);
+        if (response.rows.length === 0) {
+            throw new Error("No entries available.")
+        }
+        return response.rows.map(g => new Entry(g));
+    }
+
     static async create (data){
         const catagory = data.catagory
         const title = data.title
