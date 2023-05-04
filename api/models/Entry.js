@@ -47,7 +47,6 @@ class Entry{
         const category = data.category
         const title = data.title
         const entry = data.entry
-        console.log(data)
 
         const response = await db.query("INSERT INTO entries (entry_date, entry_time, category, entry_title, diary_entry) VALUES (CURRENT_DATE, CURRENT_TIME, $1, $2, $3);", [category, title, entry])
         
